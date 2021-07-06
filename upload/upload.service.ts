@@ -3,13 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import ConnectionConfiguration from '../connection/connection.config';
 import path from 'path';
 
-const s3 = new AWS.S3({
-    accessKeyId: 'ASIAWDLCSG3JQ3YJLLMH',
-    secretAccessKey: '4Na0Tv2+XAwtiFeJBr3QyOXpEkH9v944FBCN7/t4',
-    region: 'us-east-1',
-    sessionToken: 'FwoGZXIvYXdzEF4aDEV0WwzNy1qD5sRnZyLGAdJrxnikrpkptOwkYFkaOCbVtLDxhqsQ+kvhmhcuj8oepWUi9hIxYEcG1UfQ7ojc8afZi4tqiwuB2PYGdO+z/pNbfJysDNtbN0FyIIBjc5cBIkTaSFdxhELMnr6prFLNEaiVHCgRn1GMdmGIl1nPS/p6+bbcN4bVLJYKCMS94n9V9m/zuR86R3Qe9SQ3a6lrtlR6l4rtO3VJkPELJpQzXb4O/RfhOlF9kO0O/hUnmRsT3Js+Q8nBzBZHyOIGJ6/H9+2reDAFESjm042HBjItie7AdYJ8liqTOrjigljmezYd8ElRMbGs9Vwm2UvRspbvqdy2p/xs/h0XvMOR'
-});
-
 export class UploadService {
     static uploadFile(request: any, response: any) {
         const file = request.file;
@@ -27,6 +20,13 @@ export class UploadService {
     }
 
     private static uploadFileToS3(file: any, fileName: string) {
+        const s3 = new AWS.S3({
+            accessKeyId: process.env.ACCESS_KEY_ID,
+            secretAccessKey: process.env.SECRET_ACCESS_KEY,
+            region: process.env.REGION,
+            sessionToken: process.env.SESSION_TOKEN
+        });
+
         const bucketParams = {
             Bucket: 'photo-app-dev-test-bucket',
             Key: fileName,

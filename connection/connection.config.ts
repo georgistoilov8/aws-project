@@ -1,4 +1,5 @@
 import * as mysql from 'mysql';
+require('dotenv').config();
 
 class ConnectionConfiguration {
     
@@ -9,10 +10,17 @@ class ConnectionConfiguration {
     }
 
     private getConnection() {
+        // let connection = mysql.createConnection({
+        //     host: "localhost",
+        //     user: "root",
+        //     password: "password",
+        //     port: 3306
+        // })
+        
         let connection = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "password",
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
             port: 3306
         })
         

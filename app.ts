@@ -14,6 +14,8 @@ import { UploadRoutes } from './upload/upload.routes.config';
 import { RetrieveRoutes } from './retrieve/retrieve.routes.config';
 import { UserActionsRoutes } from './user_actions/user-actions.routes.config';
 
+require('dotenv').config();
+
 declare module "express-session" {
     interface Session {
       user: string;
